@@ -1,0 +1,100 @@
+{% comment %}
+    Home page
+    Through this single template user can view their COVID-19 results and 
+    upload their scans as well.
+
+    Author: Akhil Kokani
+{% endcomment %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Detect COVID-19 using X-ray scans by Vinayak &amp; Akhil</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body>
+    
+    <div class="wrapper">
+
+        {% csrf_token %}
+        
+        <nav class="navbar navbar-expand-sm justify-content-center bg-dark navbar-dark">
+            <a class="navbar-brand" href="{% url 'website:home' %}">CovXray</a>
+            <span class="text-muted">Detect COVID-19 using X-ray scans</span>
+        </nav>
+        
+        <div class="content-wrap">
+            <div class="row">
+                <div class="col-sm-9 image-content">
+                    <div class="scanning-animation"></div>
+                    <div class="xray-scan-preview"></div>
+                    <style>
+                        .xray-scan-preview {
+                            background-image: url("{% static 'img/xray-scan-default.png' %}");
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                            height: 600px;
+                        }
+                    </style>
+                </div>
+                <div class="col-sm-3 panel-content">
+                    <h6 class="text-secondary sub-title">ACTIONS</h6>
+
+                    <input 
+                        type="file" 
+                        id="xray-image" 
+                        style="position: absolute; top: -1000px;"
+                    >
+
+                    <button 
+                        id="scan_xray"
+                        type="button" 
+                        class="btn btn-outline-primary btn-block"
+                        >Select X-ray scan
+                    </button>
+
+                    <div class="results-content">
+                        <hr class="mt-4 mb-4" style="border-color: var(--dark);">
+
+                        <h6 class="text-secondary sub-title">RESULTS</h6>
+
+                        <!-- X-ray scan results are shown in this -->
+                        <p class="result-text text-danger">
+                            Congratulations, you do not have COVID-19!
+                        </p>
+
+                        <!-- Scan duration is shown here -->
+                        <p class="scan-duration text-muted">
+                            Completed scan in 0.94 seconds
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer text-center mt-4">
+                <p class="text-muted">Made Possible by <a href="">Vinayak J</a> &amp; <a href="">Akhil MK</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/covxray.js' %}"></script>
+</body>
+</html>

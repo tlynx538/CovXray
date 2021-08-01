@@ -1,0 +1,85 @@
+/**
+ *
+ * Custom stylesheet
+ * Styles which overwrite boostrap style as per our 
+ * requirements reside here.
+ *
+ * @author Akhil Kokani
+ */
+
+* {
+    font-family: 'Roboto';
+}
+
+:root {
+    --bg-primary: #010514;
+    --bg-secondary: #093b7d;
+}
+
+.bg-dark {
+    background-color: var(--bg-primary) !important;
+}
+
+.wrapper {
+    height: 100vh;
+    background-color: var(--bg-primary);
+}
+
+.content-wrap {
+    margin: auto;
+    margin-top: 1em;
+    max-width: 1200px;
+}
+
+.image-content {
+    padding: 15px;
+    border: 1px solid var(--bg-secondary);
+}
+.image-content, .image-content .xray-scan-preview {
+    border-radius: 40px;
+}
+
+.scanning-animation {
+    content: '';
+    position: absolute;
+    width: 890px;
+    height: 8px;
+    background-image: linear-gradient(to bottom,
+        rgba(170, 184, 190, 0),
+        rgba(170, 184, 190, .8)
+    );
+    animation: scanning-animation 4s ease-in-out infinite;
+}
+@keyframes scanning-animation {
+    100% { 
+        transform: translate(0, 592px); 
+    }
+}
+
+.sub-title {
+    letter-spacing: 1.5px;
+}
+
+.btn-outline-primary {
+    font-weight: 300;
+}
+.btn-outline-primary:hover {
+    color: #c0dfff;
+    background-color: #093b7d4d;
+}
+.btn-outline-primary:disabled {
+    background-color: rgb(17, 17, 17);
+    border-color: gray;
+    color: gray;
+}
+
+.scan-duration {
+    font-size: 11px;
+}
+
+footer p {
+    font-size: 12px;
+}
+footer a {
+    text-decoration: none;
+}
