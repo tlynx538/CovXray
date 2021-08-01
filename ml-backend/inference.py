@@ -1,3 +1,8 @@
+# Ignore PyTorch UserWarnings 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning) 
+
+
 import torchvision.transforms as transforms
 import torchvision
 from PIL import Image
@@ -6,9 +11,31 @@ import os
 from densenet121 import DenseNet121
 
 
-
 class InferenceEngine:
-    def __init__(self,model_state_path):
+
+    """
+    Inference Script for predicting images using Trained DenseNet-121 Model
+    Author: Vinayak Jaiwant
+    
+    To import the script use:
+
+    from inference import InferenceEngine
+    inf = InferenceEngine()
+    
+    To load the image and predict on it 
+    inf.load_image('COVID-19 Radiography Database/test/covid/COVID-19 (1).png')
+    print(inf.predict())
+
+    inf.predict returns an numpy array of predictions - [NORMAL,VIRAL,COVID]
+    Example: 
+        [[0.00835866 0.02281268 0.988436  ]]
+        Here the last element of the array is the highest, which means the class is COVID
+
+    Warning: Since this script is not synchronous, use asyncio to retrieve results as 
+    the inference takes a while to predict.    
+    """
+
+    def __init__(self,model_state_path='model-densenet121.pth'):
         # Load GPU for inference
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # Load DenseNet121 model with 3 classes
